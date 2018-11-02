@@ -23,11 +23,11 @@ export class CountDownComponent implements OnInit{
 
   public resetCounter(){
     this.clearCounter();
-    this.ngZone.runOutsideAngular(()=>{
+    //this.ngZone.runOutsideAngular(()=>{
       this.countdownSubscription = this.countdownService.startCountdown(this.seconds).subscribe(value =>{
         this.renderer.setProperty(this.durationElement.nativeElement, 'innerHTML', value);
       });
-    });
+    //});
   }
 
   private clearCounter(){
