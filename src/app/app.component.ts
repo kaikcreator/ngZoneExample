@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
-  name = 'Angular';
+  items = [];
+
+  ngOnInit(){
+    this.items = Array.from(Array(50).keys());
+  }
 }

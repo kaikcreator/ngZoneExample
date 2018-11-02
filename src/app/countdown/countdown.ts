@@ -1,8 +1,8 @@
 import {Component, Renderer2, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { CountdownService } from '../countdown.service';
+import { CountdownService } from './countdown.service';
 
 @Component({
-  selector: 'countdown',
+  selector: 'app-countdown',
   templateUrl: './countdown.html',
 })
 export class CountDownComponent implements OnInit{
