@@ -1,6 +1,6 @@
-import { Injectable, NgZone } from '@angular/core';
-import { interval, BehaviorSubject} from 'rxjs';
-import { share } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { interval } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Injectable({
@@ -9,25 +9,20 @@ import * as moment from 'moment';
 export class CountdownService {
 
   private initTime = null;
-  private sessionDuration = new BehaviorSubject<string>(null);
-  public changeSessionDuration$ = this.sessionDuration.asObservable();
   
-  constructor(private ngZone:NgZone) { 
+  constructor() { 
   }
 
   public startCountdown(seconds){
-    this.initTime = moment(Date.now() + seconds*1000);
-    this.checkSessionDuration();
-    return this.changeSessionDuration$;
+    this.initTime = moment(Date.now() + (seconds+1)*1000);
+    return interval(1000).pipe(
+      take(seconds),
+      map(()=>{
+        let diff = this.initTime.diff(moment());
+        let countdown = moment.utc(diff).format('mm:ss');
+        console.log("current countdown: ", countdown);
+        return countdown;
+      })
+    );
   }
-
-  checkSessionDuration(){
-    this.ngZone.runOutsideAngular(()=>{
-      interval(1000).subscribe(()=>{
-        let duration = moment.utc(this.initTime.diff(moment()));
-        this.sessionDuration.next(duration.format('mm:ss'));
-        console.log("timer executed");
-      });
-    });
-  } 
 }

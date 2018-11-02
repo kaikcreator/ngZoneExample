@@ -1,7 +1,9 @@
 <div class="header">
-  <h2>
+  <h2 class="header-title">
     <ng-content></ng-content>
   </h2>
-  <app-countdown [seconds]="maxSessionInSeconds"></app-countdown>
-  <button (click)="maxSessionInSeconds = maxSessionInSeconds + 1">reset</button>
+  <div class="header-countdown">
+      <app-countdown #countdown></app-countdown>
+      <button (click)="countdown.resetCounter()">reset</button>
+  </div>
 </div>

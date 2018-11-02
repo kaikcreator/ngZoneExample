@@ -3,3 +3,10 @@ body{
     margin: 0;
     color: #4C5760;
 }
+
+button{
+    width: 72px;
+    height: 24px;
+    margin: 2px;
+    background-color: #E6EFE9;
+}
