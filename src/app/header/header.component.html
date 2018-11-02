@@ -2,5 +2,6 @@
   <h2>
     <ng-content></ng-content>
   </h2>
-  <app-countdown></app-countdown>
+  <app-countdown [seconds]="maxSessionInSeconds"></app-countdown>
+  <button (click)="maxSessionInSeconds = maxSessionInSeconds + 1">reset</button>
 </div>

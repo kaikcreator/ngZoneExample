@@ -7,6 +7,7 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 })
 export class HeaderComponent implements OnInit, DoCheck {
 
+  public maxSessionInSeconds = 60;
   constructor() { }
 
   ngOnInit() {
