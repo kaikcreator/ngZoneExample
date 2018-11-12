@@ -1,7 +1,11 @@
-<app-header>Isolate component CD example</app-header>
+<named-component name="root" #root>
 
-<div class="content">
-  <h3>List of "default" CD components</h3>
-  <app-item *ngFor="let item of items; let i = index">Item #{{i}}</app-item>
-</div>
+  <named-component [clickCounter]="root.clickCounter" hasChild="true" name="-root-> p1">
+    <named-component [clickCounter]="root.clickCounter" hasChild="true" name="-root--p1-> p1">
+    </named-component>
+  </named-component>
 
+  <named-component name="-root-> p2">           
+  </named-component>
+
+</named-component>

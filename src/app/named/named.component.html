@@ -1,0 +1,19 @@
+<div>
+  <h1 (click)="onClick()">{{this.name}}({{this.clickCounter}})</h1>
+
+  <named-component *ngIf="hasChild" name="{{this.name}} > c1">
+      <named-component name="{{this.name}} > -c1-> p1">
+      </named-component>
+      <named-component name="{{this.name}} > -c1-> p2">
+      </named-component>      
+  </named-component>
+
+  <named-component *ngIf="hasChild" name="{{this.name}} > c2">
+    <named-component name="{{this.name}} > -c2-> p1">
+    </named-component>
+    <named-component name="{{this.name}} > -c2-> p2">
+    </named-component>      
+  </named-component>
+  
+  <ng-content></ng-content>
+</div>
