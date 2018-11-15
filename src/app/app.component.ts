@@ -9,6 +9,6 @@ export class AppComponent  {
   items = [];
 
   ngOnInit(){
-    this.items = Array.from(Array(50).keys());
+    this.items = Array.from(Array(100).keys());
   }
 }
