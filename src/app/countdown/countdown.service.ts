@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { interval } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
