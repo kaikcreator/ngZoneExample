@@ -1,4 +1,4 @@
-import {Component, Renderer2, ViewChild, ElementRef, OnInit, NgZone } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import { CountdownService } from './countdown.service';
 import { Subscription } from 'rxjs';
 
@@ -7,27 +7,31 @@ import { Subscription } from 'rxjs';
   templateUrl: './countdown.html',
 })
 export class CountDownComponent implements OnInit{
-  @ViewChild('sessionDuration') durationElement:ElementRef;
   private countdownSubscription:Subscription = null;
   private seconds:number = 10;
+  public sessionDuration:string = "00:00";
 
-  constructor(private renderer:Renderer2, private countdownService:CountdownService, private ngZone:NgZone){}
+  constructor(private countdownService:CountdownService){}
 
   ngOnInit(){
+    //start counter on component init
     this.resetCounter();
   }
 
   ngOnDestroy(){
+    //clear counter on component destroy
     this.clearCounter();   
   }
 
   public resetCounter(){
+    //when resetting counter, first clear previous subscription
     this.clearCounter();
-    //this.ngZone.runOutsideAngular(()=>{
-      this.countdownSubscription = this.countdownService.startCountdown(this.seconds).subscribe(value =>{
-        this.renderer.setProperty(this.durationElement.nativeElement, 'innerHTML', value);
-      });
-    //});
+    //then subscribe to countdown service
+    this.countdownSubscription = this.countdownService.startCountdown(this.seconds)
+    .subscribe(value =>{
+      //and update the value displayed on the template
+      this.sessionDuration = value;
+    });
   }
 
   private clearCounter(){

@@ -13,10 +13,13 @@ export class CountdownService {
   constructor() { 
   }
 
-  public startCountdown(seconds){
-    this.initTime = moment(Date.now() + (seconds+1)*1000);
+  //returns an observable that throws only "numberOfSeconds" values,
+  //one per second
+  //with a string with the remaining seconds each
+  public startCountdown(numberOfSeconds){
+    this.initTime = moment(Date.now() + (numberOfSeconds+1)*1000);
     return interval(1000).pipe(
-      take(seconds),
+      take(numberOfSeconds),
       map(()=>{
         let diff = this.initTime.diff(moment());
         let countdown = moment.utc(diff).format('mm:ss');
